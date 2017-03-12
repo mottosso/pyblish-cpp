@@ -1,14 +1,18 @@
-#include <QApplication>
-#include "window.h"
+#include <QtQml>
+#include <QtCore>
+#include <QtGui>
 
-#include <QObject>
+#include "controller.h"
 
 int main(int argc, char **argv)
 {
-    QApplication app (argc, argv);
+    QGuiApplication app(argc, argv);
 
-    Window window;
-    window.show();
+    QQmlApplicationEngine engine;
+    Controller controller;
+
+    engine.rootContext()->setContextProperty("controller", &controller);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
 }
