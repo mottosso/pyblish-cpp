@@ -8,21 +8,9 @@ C++ implementation of Pyblish QML
 
 ### Usage
 
-pyblish-cpp requires QtCreator, pyblish-base and Python.
-
-**Build**
+pyblish-cpp requires Visual Studio 2015, Qt 5.8, pyblish-base, pyblish-qml and Python.
 
 ```bash
 $ cd pyblish-cpp
-$ mkdir build
-$ cd build
-$ qmake ..
-$ nmake # windows
-$ make # linux
-```
-
-**Run**
-
-```bash
-$ python -u ../app.py %cd%/release/pyblish-cpp.exe
+$ build && run
 ```
