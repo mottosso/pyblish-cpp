@@ -3,12 +3,13 @@ QT += qml quick core gui widgets
 
 CONFIG += c++11
 
-SOURCES += main.cpp \
-    controller.cpp \
-    model.cpp
+SOURCES += \
+    src/main.cpp \
+    src/controller.cpp \
+    src/model.cpp
 
-RESOURCES += qml.qrc \
-    qml.qrc
+RESOURCES += \
+    src/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -33,9 +34,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    controller.h \
-    model.h
+    src/controller.h \
+    src/model.h
 
 DISTFILES += \
     app.py \
-    main.qml
+    src/main.qml

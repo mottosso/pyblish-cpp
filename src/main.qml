@@ -14,6 +14,7 @@ Window {
         anchors.margins: 2
         spacing: 0
 
+
         Rectangle {
             Layout.fillWidth: true
             Layout.minimumHeight: 50
