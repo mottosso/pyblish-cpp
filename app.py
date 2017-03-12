@@ -43,20 +43,18 @@ def listen(service):
 
 
 if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("exe", help="Absolute path to executable.")
+
+    kwargs = parser.parse_args()
+
     api.register_plugin_path(os.getcwd())
 
-    dirname = os.path.dirname(__file__)
-    fname = os.path.join(
-        dirname,
-        "..",
-        "build-temp-Desktop_Qt_5_8_0_MSVC2015_64bit-Debug",
-        "debug",
-        "temp.exe"
-    )
-
-    log("Launching %s" % dirname)
+    log("Launching %s" % kwargs.exe)
     popen = subprocess.Popen(
-        [fname],
+        [kwargs.exe],
 
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
