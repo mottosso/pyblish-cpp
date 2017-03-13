@@ -1,7 +1,7 @@
 TEMPLATE = app
 QT += qml quick core gui widgets
 
-CONFIG += c++11
+CONFIG += c++11 console qml_debug
 
 SOURCES += \
     src/main.cpp \
@@ -38,5 +38,6 @@ HEADERS += \
     src/model.h
 
 DISTFILES += \
-    app.py \
-    src/main.qml
+    src/py/app.py \
+    src/qml/main.qml \
+    src/qml/View.qml
