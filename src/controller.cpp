@@ -9,6 +9,7 @@
 #include "controller.h"
 #include "model.h"
 
+
 Controller::Controller(QObject *parent) : QObject(parent)
 {
 	m_pluginModel = new Model(this);
@@ -21,13 +22,7 @@ Controller::Controller(QObject *parent) : QObject(parent)
     for (auto pluginRef : pluginsArray)
     {
         QJsonObject pluginObject = pluginRef.toObject();
-
-        Plugin plugin {
-            pluginObject["name"].toString(),
-            pluginObject["family"].toString()
-        };
-
-        m_pluginModel->addPlugin(plugin);
+        m_pluginModel->addItem(pluginObject);
     }
 
     // Perform collection
@@ -54,28 +49,8 @@ Controller::Controller(QObject *parent) : QObject(parent)
     {
         QJsonObject instanceObject = instanceRef.toObject();
         std::cout << "Adding " << instanceObject["name"].toString().toUtf8().constData() << std::endl;
-
-        Plugin instance {
-            instanceObject["name"].toString(),
-            "default"
-        };
-
-        m_instanceModel->addPlugin(instance);
+        m_instanceModel->addItem(instanceObject["data"].toObject());
     }
-
-//    m_pluginModel->addPlugin(Plugin("Wolf", "Medium"));
-//    m_pluginModel->addPlugin(Plugin("Polar bear", "Large"));
-//    m_pluginModel->addPlugin(Plugin("Quoll", "Small"));
-}
-
-Model* Controller::getPluginModel()
-{
-    return m_pluginModel;
-}
-
-Model* Controller::getInstanceModel()
-{
-    return m_instanceModel;
 }
 
 QJsonObject Controller::dispatch(QString func, QVariantList args)

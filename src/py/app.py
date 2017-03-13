@@ -43,7 +43,9 @@ def listen(service):
 
 
 if __name__ == '__main__':
+    import time
     import argparse
+    import threading
 
     parser = argparse.ArgumentParser()
     parser.add_argument("exe", help="Absolute path to executable.")
@@ -54,7 +56,7 @@ if __name__ == '__main__':
 
     log("Launching %s" % kwargs.exe)
     popen = subprocess.Popen(
-        [kwargs.exe],
+        [kwargs.exe, "--aschild"],
 
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -65,5 +67,18 @@ if __name__ == '__main__':
 
     log("Listening on C++ program..")
     service = service.MockService()
-    listen(service)
+
+    thread = threading.Thread(target=listen, args=[service])
+    thread.daemon = True
+    thread.start()
+
+    log("Running..")
+
+    while popen.poll() is None:
+        try:
+            time.sleep(1)
+        except KeyboardInterrupt:
+            break
+
+    popen.terminate()
     log("Good bye")

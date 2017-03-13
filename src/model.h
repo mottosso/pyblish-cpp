@@ -3,39 +3,31 @@
 
 #include <QAbstractListModel>
 
-class Plugin
-{
-public:
-	Plugin(const QString &name, const QString &family);
-
-	QString name() const;
-	QString family() const;
-
-private:
-	QString m_name;
-	QString m_family;
-};
 
 class Model : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum PluginRoles {
+    enum ItemRoles {
         NameRole = Qt::UserRole + 1,
-        FamilyRole
+        FamilyRole,
+        TypeRole,
+        IsProcessingRole,
+        IsToggledRole
     };
 
     explicit Model(QObject *parent = 0);
 
-    void addPlugin(const Plugin &plugin);
+    void addItem(const QJsonObject &item);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QString roleName(int role) const;
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-	QList<Plugin> m_plugins;
+	QList<QJsonObject> m_items;
 
 };
 

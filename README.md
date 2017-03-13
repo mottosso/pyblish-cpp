@@ -18,9 +18,9 @@ pyblish-cpp requires..
 ```bash
 $ git clone https://github.com/mottosso/pyblish-cpp.git
 $ cd pyblish-cpp
-$ build && run
+$ build & run
 ```
 
 <br>
 
-![image](https://cloud.githubusercontent.com/assets/2152766/23834531/ccd2d51e-074f-11e7-8ea5-fb12ea32dd81.png)
+![image](https://cloud.githubusercontent.com/assets/2152766/23866367/87ad7068-0810-11e7-9ec6-09d5a310ffca.png)

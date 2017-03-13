@@ -1,63 +1,53 @@
+#include <QJsonObject>
+#include <iostream>
 #include "model.h"
 
-Plugin::Plugin(const QString &name, const QString &family)
-    : m_name(name), m_family(family)
-{
-}
-
-QString Plugin::name() const
-{
-    return m_name;
-}
-
-QString Plugin::family() const
-{
-    return m_family;
-}
 
 Model::Model(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
 
-void Model::addPlugin(const Plugin &plugin)
+void Model::addItem(const QJsonObject &item)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_plugins << plugin;
+    m_items << item;
     endInsertRows();
 }
 
 int Model::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_plugins.count();
+    return m_items.count();
 }
 
 QVariant Model::data(const QModelIndex &index, int role) const
 {
-    if (index.row() < 0 || index.row() >= m_plugins.count())
+    if (index.row() < 0 || index.row() >= m_items.count())
     {
         return QVariant();
     }
 
-    const Plugin &plugin = m_plugins[index.row()];
+    const QJsonObject &item = m_items[index.row()];
 
-    if (role == NameRole)
-    {
-        return plugin.name();
-    }
-    else if (role == FamilyRole)
-    {
-        return plugin.family();
-    }
+    QString key = roleName(role);
+    return item.value(key).toString();
+}
 
-    return QVariant();
+QString Model::roleName(int role) const
+{
+    return roleNames().value(role);
 }
 
 QHash<int, QByteArray> Model::roleNames() const
 {
     QHash<int, QByteArray> roles;
+
     roles[NameRole] = "name";
     roles[FamilyRole] = "family";
+    roles[TypeRole] = "type";
+    roles[IsProcessingRole] = "isProcessing";
+    roles[IsToggledRole] = "isToggled";
+
     return roles;
 }

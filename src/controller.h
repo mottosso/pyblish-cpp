@@ -1,11 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <QObject>
-#include <QJsonObject>
-#include <QString>
-#include <QVariantList>
-
 #include "model.h"
 
 class Controller : public QObject
@@ -17,8 +12,8 @@ class Controller : public QObject
 public:
     explicit Controller(QObject *parent = 0);
 
-    Model* getPluginModel();
-    Model* getInstanceModel();
+    Model* getPluginModel() { return m_pluginModel; }
+    Model* getInstanceModel() { return m_instanceModel; }
 
     QJsonObject dispatch(QString func, QVariantList args=QVariantList());
 

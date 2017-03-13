@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file alias="main.qml">qml/main.qml</file>
+        <file alias="View.qml">qml/View.qml</file>
+        <file alias="Check.qml">qml/Check.qml</file>
+        <file alias="SectionDelegate.qml">qml/SectionDelegate.qml</file>
+        <file alias="List.qml">qml/List.qml</file>
+        <file alias="fonts/FontAwesome.otf">qml/fonts/fontawesome/FontAwesome.otf</file>
+        <file alias="fonts/OpenSans-Regular.ttf">qml/fonts/opensans/OpenSans-Regular.ttf</file>
     </qresource>
 </RCC>
