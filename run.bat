@@ -1,2 +1,2 @@
 @echo off
-python -u app.py %~dp0build\release\pyblish-cpp.exe
+if %ERRORLEVEL%==0 python %~dp0src\py\app.py %~dp0build\debug\pyblish-cpp.exe %*

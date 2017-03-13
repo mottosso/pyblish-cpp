@@ -2,5 +2,5 @@
 if not exist build mkdir build
 pushd build
 qmake ..
-nmake
-popd
+nmake Debug && popd && echo Success! || ^
+echo Failed.. && popd && exit /B 1
